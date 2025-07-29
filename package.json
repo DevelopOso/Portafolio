@@ -4,10 +4,26 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:qa": "ng serve --configuration qa",
+    "start:staging": "ng serve --configuration staging",
+    "start:prod": "ng serve --configuration production",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:portfolioWebDevelopOso": "node dist/portfolio-web-develop-oso/server/server.mjs"
+    "build:qa": "ng build --configuration qa",
+    "build:staging": "ng build --configuration staging",
+    "build:prod": "ng build --configuration production",
+    "watch:qa": "ng build --watch --configuration development",
+    "watch:staging": "ng build --watch --configuration development",
+    "watch:prod": "ng build --watch --configuration development",
+    "test": "pnpm run lint && jest",
+    "test:coverage": "pnpm run test && npm run coverage",
+    "sonar": "gulp sonar",
+    "shscan": "npx bbog-dig-dt-sherpa-scanner-lib -c sherpa-scanner.config.js",
+    "test:config": "pnpm run test && pnpm run coverage",
+    "serve:ssr:portfolioWebDevelopOso": "node dist/portfolio-web-develop-oso/server/server.mjs",
+    "lint": "ng lint",
+    "obfuscate": "gulp obfuscate",
+    "coverage": "export $(cat test/.env-test | xargs) && jest",
+    "coverage:report": "export $(cat test/.env-test | xargs) && jest --coverage"
   },
   "private": true,
   "dependencies": {
@@ -39,5 +55,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "volta": {
+    "node": "22.17.1"
   }
 }
